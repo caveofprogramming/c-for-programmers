@@ -2,7 +2,6 @@
 
 int main() 
 {
-    
     int temperature = 5;
 
     if(temperature < 0)
@@ -17,6 +16,9 @@ int main()
     {
         printf("Too warm.\n");
     }
+
+    if(1)
+        printf("True!");
     
     return 0;
 }
