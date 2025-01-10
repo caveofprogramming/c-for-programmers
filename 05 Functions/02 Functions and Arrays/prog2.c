@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int sum(int values[], int size)
+int sum(const int values[], int size)
 {
     int result = 0;
 
@@ -8,7 +8,7 @@ int sum(int values[], int size)
     {
         result += values[i];
     }
-
+   
     return result;
 }
 
