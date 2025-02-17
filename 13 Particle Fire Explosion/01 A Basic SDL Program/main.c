@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, width, height);
 
     if (texture == NULL) 
 	{
@@ -57,28 +57,11 @@ int main(int argc, char** argv)
 
     for(int i=0; i<width*height; ++i)
     {
-        buffer[i] = 0xFFFF0000;
+        buffer[i] = 0xFF00FF00;
     }
 
-    uint32_t *pixels;
-    int pitch;
-
-    if(SDL_LockTexture(texture, NULL, (void **)&pixels, &pitch) == false)
-    {
-        fprintf(stderr, "Unable to lock surface: %s\n", SDL_GetError());
-        return 1;
-    }
-
-    for (int row=0, sp=0, dp=0; row < height; row++, dp += width, sp += pitch)
-    {
-        memcpy(pixels + sp, buffer + dp, width * 4);
-    }
-
-    SDL_UnlockTexture(texture);  
-    SDL_RenderTexture(renderer, texture, NULL, NULL);
-    SDL_RenderPresent(renderer);
-    SDL_Delay(1);
     
+
     /*
      * Event loop
      */
@@ -99,6 +82,21 @@ int main(int argc, char** argv)
                 running = false;
             }
         }
+
+        if(SDL_UpdateTexture(texture, 
+            NULL, 
+            buffer, 
+            width * 4) == false)
+        {
+            printf("%s\n", SDL_GetError());
+            return 0;
+        }
+    
+        SDL_RenderClear(renderer);
+        SDL_RenderTexture(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
+
+        SDL_Delay(2);
     }
 
     /*
