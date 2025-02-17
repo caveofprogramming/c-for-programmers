@@ -1,8 +1,11 @@
 #include <SDL3/SDL.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
 
-int main() 
+int main(int argc, char** argv)
 {
     /*
      * Initialize SDL.
@@ -13,7 +16,7 @@ int main()
     const int height = 600;
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == false) {
-		fprintf(stderr, "Unable to initialize video: %s", SDL_GetError());
+		fprintf(stderr, "Unable to initialize video: %s\n", SDL_GetError());
 		return 1;
 	}
 
@@ -21,47 +24,60 @@ int main()
 
 	if (window == NULL) 
 	{
-		fprintf(stderr, "Unable to create window: %s", SDL_GetError());
+		fprintf(stderr, "Unable to create window: %s\n", SDL_GetError());
 		return 1;
 	}
 
-    SDL_Surface *screen = SDL_GetWindowSurface(window);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
 
-    if (screen == NULL) 
+    if (renderer == NULL) 
 	{
-		fprintf(stderr, "Unable to create screen surface: %s", SDL_GetError());
+		fprintf(stderr, "Unable to create renderer: %s\n", SDL_GetError());
 		return 1;
 	}
 
-    SDL_Surface *pixels = SDL_CreateSurface(width, height, SDL_PIXELFORMAT_RGBX32);
+    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 
-    if (pixels == NULL) 
+    if (texture == NULL) 
 	{
-		fprintf(stderr, "Unable to create pixel surface: %s", SDL_GetError());
+		fprintf(stderr, "Unable to create texture: %s\n", SDL_GetError());
 		return 1;
 	}
 
     /*
      * Draw on the screen.
      */
-    SDL_FillSurfaceRect(pixels, NULL, 0);
-
-    if(SDL_LockSurface(pixels) == false)
+    uint32_t *buffer = malloc(width*height*4);
+    
+    if(buffer == NULL)
     {
-        fprintf(stderr, "Unable to lock surface: %s", SDL_GetError());
+        fprintf(stderr, "Unable to allocate buffer.\n");
         return 1;
     }
 
-    //memset(pixels->pixels, 0, width*height*4);
-
-    //SDL_BlitSurface(pixels, NULL, screen, NULL);
-
-    if(SDL_UpdateWindowSurface(window) == false)
+    for(int i=0; i<width*height; ++i)
     {
-        fprintf(stderr, "Unable to update window: %s", SDL_GetError());
+        buffer[i] = 0xFFFF0000;
     }
 
-    SDL_UnlockSurface(pixels);
+    uint32_t *pixels;
+    int pitch;
+
+    if(SDL_LockTexture(texture, NULL, (void **)&pixels, &pitch) == false)
+    {
+        fprintf(stderr, "Unable to lock surface: %s\n", SDL_GetError());
+        return 1;
+    }
+
+    for (int row=0, sp=0, dp=0; row < height; row++, dp += width, sp += pitch)
+    {
+        memcpy(pixels + sp, buffer + dp, width * 4);
+    }
+
+    SDL_UnlockTexture(texture);  
+    SDL_RenderTexture(renderer, texture, NULL, NULL);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(1);
     
     /*
      * Event loop
@@ -88,9 +104,9 @@ int main()
     /*
      * Clean up.
      */
-
-    SDL_DestroySurface(pixels);
-    SDL_DestroySurface(screen);
+    free(buffer);
+    SDL_DestroyTexture(texture);
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
