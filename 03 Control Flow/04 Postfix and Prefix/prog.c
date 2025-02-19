@@ -15,5 +15,6 @@ int main()
     printf("\n");
     
     value = 1;
+    // TODO May be undefined.
     printf("Result: %d\n", 2 * value++ + ++value);
 }

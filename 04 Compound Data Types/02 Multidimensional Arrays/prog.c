@@ -2,8 +2,11 @@
 
 int main()  
 {
-    const int ROWS = 2;
-    const int COLS = 3;
+    // TODO: Variable-sized arrays are allowed in C99, but I find mingw still gives
+    // an error if I used constants here instead of defines.
+    // error: variable-sized object may not be initialized except with an empty initializer
+    #define ROWS 2
+    #define COLS 3
     double table[ROWS][COLS] = {{1.1, 2.1, 3.1}, {4.2, 5.2, 6.2}};
 
     printf("Item at 1,2: %.1f\n", table[1][2]);

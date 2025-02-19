@@ -3,7 +3,8 @@
 
 int main()  
 {
-    const int SIZE = 3;
+    // TODO, used const originally
+    #define SIZE 3
 
     int values1[SIZE];
     memset(values1, 0, sizeof(values1)); // Not portable

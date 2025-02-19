@@ -1,0 +1,7 @@
+On Mac and Windows console, programs can be built and run with:
+gcc -Wall .\prog.c -o prog && .\prog
+
+On PowerShell on Windows, the following works:
+cmd /c "gcc -Wall .\prog.c -o prog && .\prog"
+
+Wildcards like *.c working on Mac, but not on Windows.

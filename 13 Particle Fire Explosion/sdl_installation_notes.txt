@@ -1,0 +1,10 @@
+On Windows I downloaded the pre-built mingw x86 binaries, unzipped and used them to compile like this:
+gcc main.c -o fire -I ..\..\x86_64-w64-mingw32\include\ -L ..\..\x86_64-w64-mingw32\lib -l SDL3
+
+Programs failed silently till I copied SDL3.dll into the program directory.
+- copy x86_64-w64-mingw32/bin/SDL3.dll to program directory.
+
+On Mac, I install cmake and git using brew. I downloaded the SDL3 source, built and installed it.
+Then determined the correct compiler settings using pkg-info SDL3
+
+

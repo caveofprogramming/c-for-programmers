@@ -14,7 +14,7 @@ int main()
 
     int value = 1234;
 
-    const int SIZE = 4;
+    #define SIZE 4 // TODO use define not const
     double values[SIZE] = {6.1, 7.2, 8.3, 9.4};
 
     fwrite(&value, sizeof(int), 1, fh);

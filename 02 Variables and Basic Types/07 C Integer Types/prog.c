@@ -5,7 +5,16 @@
  *
  * char, short int, int, long int, long long int
  * 
+ * Example output on Windows:
+ * Size of char: 1
+ * Size of short int: 2
+ * Size of int: 4
+ * Size of long int: 4
+ * Size of long long int: 8
  * 
+ * Note: mingw on Windows gives me warning with -Wall because sizeof  
+ * returns long long unsigned int:
+ * format specifier should be %llu
  */
 
 int main()

@@ -2,6 +2,13 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+/*
+ * Sample output on Windows laptop with mingw: 
+ * 0.123456791043281555175781250000: 4
+ * 0.123456789012345677369886232100: 8
+ * 0.000000000000000000000000000000: 16
+ */
+
 int main()
 {
     float value1 = 0.123456789012345678901234567890f;
