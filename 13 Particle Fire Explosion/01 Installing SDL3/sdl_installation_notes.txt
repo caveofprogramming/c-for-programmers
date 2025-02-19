@@ -1,0 +1,30 @@
+On Windows I downloaded the pre-built mingw x86 binaries, unzipped and used them to compile like this:
+gcc main.c -o fire -I ..\..\x86_64-w64-mingw32\include\ -L ..\..\x86_64-w64-mingw32\lib -l SDL3
+
+Programs failed silently till I copied SDL3.dll into the program directory.
+- copy x86_64-w64-mingw32/bin/SDL3.dll to program directory.
+
+On Mac, I install cmake and git using brew. 
+I downloaded the SDL3 source, built and installed it.
+
+Note: target 10.13 has to be changed to your Mac OSX version.
+
+git clone https://github.com/libsdl-org/SDL
+cd SDL
+mkdir build
+cd build
+cmake .. -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13
+cmake --build .
+sudo cmake --install .
+
+Then I determined the correct compiler settings using 
+pkg-info SDL3
+
+pkg-config --cflags --libs sdl3 
+-I/usr/local/include -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lSDL3
+
+From this I had to delete rpath, to give:
+
+gcc *.c -o fire -I/usr/local/include -L/usr/local/lib -lSDL3
+
+

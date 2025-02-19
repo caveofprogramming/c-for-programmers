@@ -6,114 +6,48 @@
 #include <math.h>
 #include <assert.h>
 
+
 double TESTDATA[][6] = 
 {   // rgb hsl
-    { 0.0000,0.0000,0.0000,0.0000,0.0000,0.0000 },
-    { 0.0760,0.0774,0.0729,0.2191,0.0298,0.0751 },
-    { 1.0000,1.0000,1.0000,1.0000,1.0000,1.0000 },
-    { 0.0748,0.0061,0.0637,0.8601,0.8501,0.0404 },
-    { 0.0488,0.2559,0.2811,0.5180,0.7039,0.1650 },
-    { 0.1390,0.0201,0.1536,0.8151,0.7684,0.0868 },
-    { 0.0241,0.0488,0.0417,0.4518,0.3386,0.0365 },
-    { 0.5211,0.3066,0.5440,0.8173,0.2790,0.4253 },
-    { 0.2436,0.4741,0.2806,0.3600,0.3211,0.3589 },
-    { 0.5996,0.2898,0.2188,0.0311,0.4653,0.4092 },
-    { 0.7348,0.7444,0.7971,0.6410,0.1329,0.7659 },
-    { 0.9745,0.8729,0.7954,0.0722,0.7785,0.8849 },
-    { 0.1030,0.1047,0.1034,0.3753,0.0082,0.1038 },
-    { 0.4618,0.4300,0.3090,0.1320,0.1981,0.3854 },
-    { 0.7205,0.5208,0.9366,0.7467,0.7662,0.7287 },
-    { 0.1409,0.9096,0.5670,0.4257,0.8096,0.5252 },
-    { 0.2652,0.2960,0.2922,0.4794,0.0548,0.2806 },
-    { 0.4833,0.0477,0.7709,0.7671,0.8835,0.4093 },
-    { 0.1099,0.1450,0.1343,0.4494,0.1374,0.1274 },
-    { 0.6982,0.3060,0.8209,0.7936,0.5898,0.5635 },
+    { 0,0,0,0.0000,0.0000,0.0000 },
+    { 18,46,23,0.3600,0.4319,0.1260 },
+    { 255,255,255,1.0000,1.0000,1.0000 },
+    { 223,25,77,0.9561,0.7999,0.4860 },
+    { 2,59,15,0.3707,0.9296,0.1198 },
+    { 234,123,90,0.0375,0.7773,0.6367 },
+    { 205,225,141,0.2061,0.5860,0.7182 },
+    { 1,1,2,0.7294,0.5446,0.0060 },
+    { 185,252,245,0.4830,0.9053,0.8559 },
+    { 15,78,33,0.3814,0.6839,0.1806 },
+    { 208,193,254,0.7083,0.9672,0.8768 },
+    { 243,221,191,0.0962,0.6915,0.8511 },
+    { 184,180,253,0.6737,0.9524,0.8503 },
+    { 4,2,4,0.8359,0.4667,0.0111 },
+    { 217,179,237,0.7784,0.6101,0.8141 },
+    { 29,2,53,0.7533,0.9187,0.1091 },
+    { 29,16,17,0.9772,0.2940,0.0872 },
+    { 168,34,184,0.8158,0.6846,0.4272 },
+    { 231,175,169,0.0159,0.5560,0.7842 },
+    { 18,229,206,0.4821,0.8541,0.4834 },
 };
 
-uint32_t hslrgb(double hue, double sat, double light)
+uint32_t hsl_to_rgb(double hue, double sat, double light)
 {
-    rgb_t rgb = hsl_to_rgb(hue, sat, light);
-    return tuple_to_bytes(rgb.red, rgb.green, rgb.blue, 0);
+    /*
+     * Add code here so that we return the correct
+     * RGB color.
+     * 
+     * If needed use the macros in graphics.h.
+     * 
+     * hue, sat and light all range from 0-1.
+     * The RGB colour should be equivalent to a 6-digit hex number.
+     * E.g if red = 0x12, green = 0xAB and blue = 0x9F, return
+     * 0x0012AB9F
+     */
+    return 0;
 }
 
-
-rgb_t hsl_to_rgb(double hue, double sat, double light)
-{
-    assert(hue >= 0);
-    assert(sat >= 0 && sat <= 1.0);
-    assert(light >= 0 && light <= 1.0);
-
-    hue = (hue - floor(hue)) * 6.0;
-    assert(hue >=0 && hue <= 6.0);
-
-    double chroma = (1 - fabs(2*light - 1)) * sat;
-
-    double hue_mod_2 = hue - (((int)hue/2) * 2);
-    assert(hue_mod_2 < 2.0);
-
-    double x = chroma * (1 - fabs(hue_mod_2 - 1));
-
-    rgb_t rgb;
-    
-    if(hue < 1.0)
-    {
-        rgb = (rgb_t) { .red = chroma, .green = x, .blue = 0 };
-    }
-    else if(hue < 2.0)
-    {
-        rgb = (rgb_t) { .red = x, .green = chroma, .blue = 0 };
-    }
-    else if(hue < 3.0)
-    {
-        rgb = (rgb_t) { .red = 0, .green = chroma, .blue = x };
-    }
-    else if(hue < 4.0)
-    {
-        rgb = (rgb_t) { .red = 0, .green = x, .blue = chroma };
-    }
-    else if(hue < 5.0)
-    {
-        rgb = (rgb_t) { .red = x, .green = 0, .blue = chroma };
-    }
-    else 
-    {
-        rgb = (rgb_t) { .red = chroma, .green = 0, .blue = x };
-    }
-
-    assert(hue >= 0 && hue <= 6.0);
-
-    double m = light - chroma/2; 
-    if(m < 0) m = 0; // m can end up a very tiny -ve number.
-
-    rgb.red += m;
-    rgb.green += m;
-    rgb.blue += m;
-
-    assert(rgb.red >=0 && rgb.red <= 1.0);
-    assert(rgb.green >=0 && rgb.green <= 1.0);
-    assert(rgb.blue >=0 && rgb.blue <= 1.0);
-
-    return rgb;
-}
-
-static bool close(double a, double b)
-{
-    return fabs(a-b) < 0.001;
-}
-
-static uint32_t tuple_to_bytes(double a, double b, double c, double d)
-{
-    uint32_t result = 0;
-
-    result += ((uint32_t)round(a * 0xFF)) << 24;
-    result += ((uint32_t)round(b * 0xFF)) << 16;
-    result += ((uint32_t)round(c * 0xFF)) << 8;
-    result += ((uint32_t)round(d * 0xFF));
-
-    return result;
-}
-
-void test_hslrgb()
+void hsl_test()
 {
     const int rowsize = sizeof(double) * 6;
     double entries = sizeof(TESTDATA)/rowsize;
@@ -129,10 +63,10 @@ void test_hslrgb()
         double sat = *p++;
         double light = *p++;
         
-        rgb_t result = hsl_to_rgb(hue, sat, light);
+        uint32_t color = hsl_to_rgb(hue, sat, light);
 
-        assert(close(result.red, red));
-        assert(close(result.green, green));
-        assert(close(result.blue, blue));
+        assert(RED(color) == (int)red);
+        assert(GREEN(color) == (int)green);
+        assert(BLUE(color) == (int)blue);
     }
 }

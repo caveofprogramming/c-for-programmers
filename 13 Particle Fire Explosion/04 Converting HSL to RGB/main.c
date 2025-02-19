@@ -5,34 +5,27 @@
 #include <string.h>
 #include <stdlib.h>
 #include "include/graphics.h"
+#include "include/hslrgb.h"
 
 /*
- * Present a window filled with green.asm
- *
- * Next: refactor this into three functions and a struct.
+ * Note: in graphics.h, I've added macros RGB, R, G and B for converting
+ * between separate RGB values and a combined RGB value.
  * 
- * The struct contains all variables that would otherwise
- * have to be global, including the pixel buffer.
- * It should also store the width and height of the window.
+ * E.g. if color = 0x123456, RED(color) is 0x12
+ * and RGB(12,34,56) is 0x123456
  * 
- * An initialization function creates this struct and returns 
- * it after initializing the SDL graphics.asm
+ * Complete the function hslrgb in graphics.c to convert
+ * hue, saturation and lightness values to an RGB color value.
  * 
- * This is paired with a destroy function that frees all
- * objects and quits the program.
+ * The tests run below by hsl_test() should then pass.
  * 
- * In-between, an event loop function checks for events
- * and draws whatever is currently in the pixel buffer.
- * 
- * main() should only call these three functions.
- * 
- * Consider prefixing the functions with a common prefix
- * to ensure they don't conflict with any other function.
- * E.g. gs_
  */
 
 int main(int argc, char** argv)
 {
+    // Call the hsl_to_rgb test function.
+    hsl_test();
+
     const int width = 800;
     const int height = 600;
 
