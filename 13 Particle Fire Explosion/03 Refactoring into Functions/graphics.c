@@ -53,7 +53,7 @@ gs_graphics *gs_init_graphics(char title[], int width, int height)
     return g;
 }
 
-bool gs_event_loop(gs_graphics *g)
+bool gs_poll_events(gs_graphics *g)
 {
     bool running = true;
 
