@@ -11,6 +11,10 @@
  * Implemented the blur functions.
  * 
  * Next: tweak the particle motion and colour change in whatever way seems good.
+ * 
+ * Add code that recycles particles back to the center if they stray too far.
+ * 
+ * Can also try tweaking number of particles and the delay between frames.
  */
 
 int main(int argc, char** argv)
