@@ -19,8 +19,10 @@
  * 
  * Added graphics test code and calling graphics_test_blur() at start of main.
  * 
- * Changed pixel format to SDL_PIXELFORMAT_XRGB8888 (instead of SDL_PIXELFORMAT_XRGB8888)
- * so that we can forget about the alpha value.
+ * NOTE: I've made vertical_blur and horizontal_blur static, because they shouldn't
+ * be called directly outside of the graphic module. They are called by graphics_blur,
+ * which isn't static. But some compilers will give incorrect warnings about the
+ * two static functions being unused or even not defined.
  * 
  * TODO:
  * 
