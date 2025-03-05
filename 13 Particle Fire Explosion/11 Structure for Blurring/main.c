@@ -19,7 +19,7 @@
  * 
  * Added graphics test code and calling graphics_test_blur() at start of main.
  * 
- * Changed pixel format to SDL_PIXELFORMAT_XRGB8888 (instead of SDL_PIXELFORMAT_ARGB8888)
+ * Changed pixel format to SDL_PIXELFORMAT_XRGB8888 (instead of SDL_PIXELFORMAT_XRGB8888)
  * so that we can forget about the alpha value.
  * 
  * TODO:

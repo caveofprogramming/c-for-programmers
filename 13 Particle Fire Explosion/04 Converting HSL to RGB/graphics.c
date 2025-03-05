@@ -31,7 +31,7 @@ gs_graphics *gs_init_graphics(char title[], int width, int height)
 		return NULL;
 	}
 
-    g->texture = SDL_CreateTexture(g->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, width, height);
+    g->texture = SDL_CreateTexture(g->renderer, SDL_PIXELFORMAT_XRGB8888, SDL_TEXTUREACCESS_STATIC, width, height);
 
     if (g->texture == NULL) 
 	{

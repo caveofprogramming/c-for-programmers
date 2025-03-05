@@ -35,7 +35,7 @@ void swarm_draw(particle_t *particles, gs_graphics *g, int num_particles)
         int x = (int)(g->width * p->x) + g->width/2;
         int y = (int)(g->width * p->y) + g->height/2;
 
-        int32_t color = hsl_to_rgb(hue, 1, 0.7) | 0xFF000000;
+        int32_t color = hsl_to_rgb(hue, 1, 0.7);
 
         if(x >= 0 && y >= 0 && x < g->width && y < g->height)
             g->buffer[y * g->width + x] = color;
