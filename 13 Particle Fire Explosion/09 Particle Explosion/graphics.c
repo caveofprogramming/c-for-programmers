@@ -77,6 +77,8 @@ bool gs_draw(gs_graphics *g)
     SDL_RenderPresent(g->renderer);
 
     SDL_Delay(2);
+
+    return true;
 }
 
 bool gs_poll_events(gs_graphics *g)

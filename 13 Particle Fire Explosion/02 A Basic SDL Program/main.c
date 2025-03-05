@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 /*
- * Present a window filled with green.asm
+ * Present a window filled with green.
  *
  * Next: refactor this into three functions and a struct.
  * 
