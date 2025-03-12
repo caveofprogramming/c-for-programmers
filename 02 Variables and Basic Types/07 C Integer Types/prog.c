@@ -11,10 +11,12 @@
  * Size of int: 4
  * Size of long int: 4
  * Size of long long int: 8
- * 
- * Note: mingw on Windows gives me warning with -Wall because sizeof  
- * returns long long unsigned int:
- * format specifier should be %llu
+ *  
+ * Note: mingw on Windows gives me warning with the -Wall
+ * compiler option (which turns on all warnings)
+ * because sizeof returns long long unsigned int on my
+ * Windows machine.
+ * The format specifier should then ideally be %llu.
  */
 
 int main()

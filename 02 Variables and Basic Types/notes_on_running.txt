@@ -4,4 +4,4 @@ gcc -Wall .\prog.c -o prog && .\prog
 On PowerShell on Windows, the following works:
 cmd /c "gcc -Wall .\prog.c -o prog && .\prog"
 
-Wildcards like *.c working on Mac, but not on Windows.
+Wildcards like *.c work on Mac, but not on Windows.

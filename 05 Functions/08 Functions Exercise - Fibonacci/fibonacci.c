@@ -14,7 +14,7 @@ void fibonacci(int values[], int number_values)
         values[1] = 1;
     }
 
-    for(int i=2; i<=number_values; ++i)
+    for(int i=2; i < number_values; ++i)
     {
         values[i] = values[i-1] + values[i-2];
     }
