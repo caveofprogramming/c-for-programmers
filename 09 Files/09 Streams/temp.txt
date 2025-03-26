@@ -1,0 +1,2 @@
+Hello
+Enter some text: Read: hello

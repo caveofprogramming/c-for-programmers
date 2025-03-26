@@ -15,7 +15,7 @@
  * It should also store the width and height of the window.
  * 
  * An initialization function creates this struct and returns 
- * it after initializing the SDL graphics.asm
+ * it after initializing the SDL graphics
  * 
  * This is paired with a destroy function that frees all
  * objects and quits the program.
@@ -117,7 +117,7 @@ int main(int argc, char** argv)
             width * 4) == false)
         {
             printf("Error updating texture: %s\n", SDL_GetError());
-            return 0;
+            return 1;
         }
     
         SDL_RenderClear(renderer);

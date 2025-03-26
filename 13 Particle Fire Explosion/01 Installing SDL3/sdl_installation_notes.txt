@@ -18,13 +18,21 @@ cmake --build .
 sudo cmake --install .
 
 Then I determined the correct compiler settings using 
-pkg-info SDL3
+pkg-config
+
+I installed pkg-config using brew.
 
 pkg-config --cflags --libs sdl3 
 -I/usr/local/include -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lSDL3
 
-From this I had to delete rpath, to give:
-
+On an old Mac this I had to delete rpath, to give:
 gcc *.c -o fire -I/usr/local/include -L/usr/local/lib -lSDL3
+
+On a newer Mac this worked fine
+-I/usr/local/include -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lSDL3
+
+except since I was using PowerShell, I actually had to write
+-I/usr/local/include -L/usr/local/lib "-Wl,-rpath,/usr/local/lib" -lSDL3
+to avoid "missing parameter in argument list".
 
 
