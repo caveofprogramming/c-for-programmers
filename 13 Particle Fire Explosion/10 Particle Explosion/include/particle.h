@@ -12,6 +12,6 @@ typedef struct
 } particle_t;
 
 void particle_init(particle_t *p);
-void particle_update(particle_t *p, int elapsed);
+void particle_update(particle_t *p);
 
 #endif

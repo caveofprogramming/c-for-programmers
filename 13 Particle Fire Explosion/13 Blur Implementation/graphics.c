@@ -256,10 +256,6 @@ bool gs_draw(gs_graphics *g)
     * Draw on the screen.
     */
 
-    static int time = 0;
-    g->elapsed = SDL_GetTicks() - time;
-    time = SDL_GetTicks();
-
     if(SDL_UpdateTexture(g->texture, 
         NULL, 
         g->buffer, 

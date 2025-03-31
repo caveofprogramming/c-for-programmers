@@ -11,7 +11,6 @@ typedef struct
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     uint32_t *buffer;
-    int elapsed;
 } gs_graphics;
 
 #define RED(color) ((color >> 16) & 0xFF)

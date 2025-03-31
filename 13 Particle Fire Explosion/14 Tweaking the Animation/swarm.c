@@ -14,11 +14,11 @@ particle_t *swarm_create(int num_particles)
     return p;
 }
 
-void swarm_update(particle_t *swarm, gs_graphics *g, int num_particles)
+void swarm_update(particle_t *swarm, int num_particles)
 {
     for(int i=0; i < num_particles; ++i)
     {
-        particle_update(swarm + i, g->elapsed);
+        particle_update(swarm + i);
     }
 }
 

@@ -31,7 +31,7 @@ int main(int argc, char** argv)
     
     while(gs_poll_events(g))
     {
-        swarm_update(swarm, g, nparticles);
+        swarm_update(swarm, nparticles);
         swarm_draw(swarm, g, nparticles);
         graphics_blur(g);
         gs_draw(g);
