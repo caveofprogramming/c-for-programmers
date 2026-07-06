@@ -1,0 +1,11 @@
+# To build:
+
+# Change into build directory and run cmake ..
+cd build
+cmake ..
+
+
+# Run cmake --build . in the build directory
+cmake --build .
+
+# Run pixelfire
