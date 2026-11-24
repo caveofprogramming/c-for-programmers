@@ -3,8 +3,10 @@
 
 int main()  
 {
-    // TODO, used const originally
     #define SIZE 3
+
+    // or this in C23 ...
+    // constexpr int SIZE = 3;
 
     int values1[SIZE];
     memset(values1, 0, sizeof(values1)); // Not portable
